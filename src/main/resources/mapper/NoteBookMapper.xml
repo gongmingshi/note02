@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.loaol.note02.dao.NoteBookDao">
+	<select id="noteBookList" parameterType="String" resultType="cn.loaol.note02.entity.NoteBook">
+		SELECT
+		cn_notebook.cn_notebook_id AS notebookId,
+		cn_notebook.cn_user_id AS userId,
+		cn_notebook.cn_notebook_type_id AS notebookTypeId,
+		cn_notebook.cn_notebook_name AS notebookName,
+		cn_notebook.cn_notebook_desc AS notebookDesc,
+		cn_notebook.cn_notebook_createtime AS notbookCreatetime
+		FROM `cn_notebook`
+		WHERE
+		cn_user_id = #{id}
+	</select>
+
+	<select id="notebookone" parameterType="String" resultType="cn.loaol.note02.entity.NoteBook">
+		SELECT
+		cn_notebook.cn_notebook_id AS notebookId,
+		cn_notebook.cn_user_id AS userId,
+		cn_notebook.cn_notebook_type_id AS notebookTypeId,
+		cn_notebook.cn_notebook_name AS notebookName,
+		cn_notebook.cn_notebook_desc AS notebookDesc,
+		cn_notebook.cn_notebook_createtime AS notbookCreatetime
+		FROM `cn_notebook`
+		WHERE
+		cn_notebook_id = #{id}
+	</select>
+	
+	<insert id="insertnotebook" parameterType="cn.loaol.note02.entity.NoteBook">
+		insert into cn_notebook values(#{notebookId},#{userId},#{notebookTypeId},#{notebookName},#{notebookDesc},#{notbookCreatetime})
+	</insert>
+	<update id="updatenotebook" parameterType="cn.loaol.note02.entity.NoteBook">
+		update cn_notebook
+		 set cn_user_id=#{userId ,jdbcType=VARCHAR},
+			 cn_notebook_type_id=#{notebookTypeId ,jdbcType=VARCHAR},
+			 cn_notebook_name=#{notebookName ,jdbcType=VARCHAR},
+			 cn_notebook_desc=#{notebookDesc ,jdbcType=VARCHAR},
+			 cn_notebook_createtime=#{notbookCreatetime ,jdbcType=TIMESTAMP}	
+	   where cn_notebook_id = #{notebookId}
+	</update>
+</mapper>

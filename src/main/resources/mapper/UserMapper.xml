@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.loaol.note02.dao.UserDao">
+	<select id="findUserByName" parameterType="String" resultType="cn.loaol.note02.entity.User">
+		SELECT
+		cn_user.cn_user_id AS id,
+		cn_user.cn_user_name AS name,
+		cn_user.cn_user_password AS password,
+		cn_user.cn_user_token AS token,
+		cn_user.cn_user_nick AS nick
+		from cn_user
+		 where cn_user_name=#{name}
+	</select>
+	<insert id="addUser" parameterType="cn.loaol.note02.entity.User">
+		insert into cn_user values(#{id},#{name},#{password},#{token},#{nick})
+	</insert>
+</mapper>

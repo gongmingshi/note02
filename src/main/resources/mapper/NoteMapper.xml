@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.loaol.note02.dao.NoteDao">
+	<select id="notelist" parameterType="String" resultType="cn.loaol.note02.entity.Note">
+		SELECT
+		cn_note.cn_note_id AS noteid,
+		cn_note.cn_notebook_id AS notebookid,
+		cn_note.cn_user_id AS userid,
+		cn_note.cn_note_status_id AS notestatusid,
+		cn_note.cn_note_type_id AS notetypeid,
+		cn_note.cn_note_title AS notetitle,
+		cn_note.cn_note_body AS notebody,
+		cn_note.cn_note_create_time AS notecreatetime,
+		cn_note.cn_note_last_modify_time AS notelastmodifytime
+		FROM
+		cn_note
+		WHERE
+		cn_note.cn_notebook_id = #{id}
+	</select>
+	
+	<select id="noteone" parameterType="String" resultType="cn.loaol.note02.entity.Note">
+		SELECT
+		cn_note.cn_note_id AS noteid,
+		cn_note.cn_notebook_id AS notebookid,
+		cn_note.cn_user_id AS userid,
+		cn_note.cn_note_status_id AS notestatusid,
+		cn_note.cn_note_type_id AS notetypeid,
+		cn_note.cn_note_title AS notetitle,
+		cn_note.cn_note_body AS notebody,
+		cn_note.cn_note_create_time AS notecreatetime,
+		cn_note.cn_note_last_modify_time AS notelastmodifytime
+		FROM
+		cn_note
+		WHERE
+		cn_note.cn_note_id= #{id}
+	</select>
+
+	<insert id="insertnote" parameterType="cn.loaol.note02.entity.Note">
+	INSERT INTO cn_note VALUES (
+		#{noteid},#{notebookid},#{userid},#{notestatusid},#{notetypeid},
+		#{notetitle},#{notebody},#{notecreatetime},#{notelastmodifytime}
+	)
+	</insert>
+	
+	<update id="updatenote"  parameterType="cn.loaol.note02.entity.Note">
+		UPDATE cn_note
+		 set cn_notebook_id=#{notebookid},
+			 cn_user_id=#{userid},
+			 cn_note_status_id=#{notestatusid},
+			 cn_note_type_id=#{notetypeid},
+			 cn_note_title=#{notetitle},
+			 cn_note_body=#{notebody},
+			 cn_note_create_time=#{notecreatetime},
+			 cn_note_last_modify_time=#{notelastmodifytime}
+		where cn_note_id=#{noteid}
+	</update>
+
+</mapper>
